@@ -12,8 +12,8 @@ RSpec.describe 'CLI' do
   end
 
   context 'when specified images file does not exist' do
-    it 'prints error message' do
-      
+    it 'prints the error message' do
+
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe 'CLI' do
   end
 
   context 'with no arguments' do
-    it 'prints warning message' do
+    it 'prints the warning message' do
       expect(run_app(arg: nil)).to include('Please, specify images file path and download path. Use -h for help')
     end
   end

@@ -28,7 +28,7 @@ class CLI
     opt_parser.parse!(options)
 
     if args.file_path && args.download_path
-      puts args
+      App.run(file_path: args.file_path, download_path: args.download_path)
     else
       puts "Please, specify images file path and download path. Use -h for help"
       puts "Exiting ..."

@@ -1,13 +1,23 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'fileutils'
 
 RSpec.describe 'CLI' do
   include IntegrationHelpers
 
+  let(:file_path) { File.join(File.expand_path('../fixtures', __dir__), 'images.txt') }
+  let(:download_path) { File.join(File.expand_path('../fixtures/tmp', __dir__)) }
+
   context 'with valid [-f] and [-d] arguments' do
-    it 'suceeds without errors' do
-      
+    around do |ex|
+      FileUtils.rm_f Dir[File.join(download_path, '**', '*')]
+      ex.run
+    end
+
+    it 'downloads images from the sample file' do
+      run_app(arg: "-f #{file_path} -d #{download_path}")
+      expect(Dir[File.join(download_path, '**', '*')].length).to eq 3
     end
   end
 
@@ -23,4 +33,3 @@ RSpec.describe 'CLI' do
     end
   end
 end
-

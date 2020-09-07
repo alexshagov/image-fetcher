@@ -14,6 +14,10 @@ RSpec.describe Models::Image do
     download_path + uniq_image_salt + 'image.jpg'
   end
 
+  before do
+    allow($stdout).to receive(:puts)
+  end
+
   describe '#download' do
     before do
       allow(URI).to receive(:open).with(url).and_return(downloaded_resource_double)

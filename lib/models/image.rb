@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'securerandom'
 
 module Models
   class Image
@@ -13,12 +14,18 @@ module Models
     end
 
     def download(to:)
-      puts "Saving #{url} ..."
+      download_path = ::File.join(to, generate_uniq_image_name)
 
-      IO.copy_stream(to, URI.open(url))
+      puts "Saving #{url} as #{download_path} ..."
+
+      IO.copy_stream(URI.open(url), download_path)
     end
 
     private
+
+    def generate_uniq_image_name
+      SecureRandom.uuid + url.split('/').last
+    end
 
     def validate_image_extension!(url)
       error_message = "Invalid image extension. Supported formats are: #{SUPPORTED_FORMATS.join(',')}"

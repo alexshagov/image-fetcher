@@ -8,7 +8,7 @@ module Models
     end
 
     def entries
-      ::File.foreach(file_path)
+      ::File.foreach(file_path, chomp: true)
     end
 
     private

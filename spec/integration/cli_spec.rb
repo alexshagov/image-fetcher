@@ -7,13 +7,7 @@ RSpec.describe 'CLI' do
 
   context 'with valid [-f] and [-d] arguments' do
     it 'suceeds without errors' do
-
-    end
-  end
-
-  context 'when specified images file does not exist' do
-    it 'prints the error message' do
-
+      
     end
   end
 
